@@ -39,7 +39,9 @@ The test runner used is [Jasmine](http://jasmine.github.io/) with a customized r
 
 ##  Pass vs Fail
 
-모든 테스트를 100% 통과시킬 경우, Pass입니다.
+**모든 테스트를 100% 통과시킬 경우, Pass입니다.**
+
+## Etc
 
 ### Changelog
 *  v3 - Nov 2010  - Moved out of branch of functional-koans project, into own top level project
