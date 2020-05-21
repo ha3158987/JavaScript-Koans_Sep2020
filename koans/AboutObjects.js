@@ -1,108 +1,71 @@
-describe("About Objects", function () {
+/*
+ * AboutObjects.js는 자바스크립트 Object(객체)에 대해 알아보는 시간입니다.
+ * 각종 문서를 참고하여 아래 문제를 하나씩 풀어보세요.
+ *
+ * MDN: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Object_initializer
+ * Poiema Web: https://poiemaweb.com/js-object
+ *
+ */
 
-  describe("Properties", function () {
-    var megalomaniac;
+describe("JavaScript Object(객체) 알아보기", function () {
 
-    beforeEach(function () {
-       megalomaniac = {  mastermind: "Joker", henchwoman: "Harley" };
+  describe("1. 객체의 속성(Property 혹은 Key)", function () {
+    var ken = {  favoriteFood: "돈까스", age: 10 };
+
+    it("객체의 속성(Property 혹은 Key)으로 접근하기", function () {
+      expect(ken.age).toBe(FILL_ME_IN);
     });
 
-    it("should confirm objects are collections of properties", function () {
-      expect(megalomaniac.mastermind).toBe(FILL_ME_IN);
-    });
-
-    it("should confirm that properties are case sensitive", function () {
-      expect(megalomaniac.henchwoman).toBe(FILL_ME_IN);
-      expect(megalomaniac.henchWoman).toBe(FILL_ME_IN);
+    it("객체의 속성 대소문자 정확히 하기", function () {
+      expect(ken.favoriteFood).toBe(FILL_ME_IN);
+      expect(ken.favoritefood).toBe(FILL_ME_IN);
     });
   });
 
-
-  it("should know properties that are functions act like methods", function () {
-    var megalomaniac = {
-      mastermind : "Brain",
-      henchman: "Pinky",
-      battleCry: function (noOfBrains) {
-        return "They are " + this.henchman + " and the" +
-          Array(noOfBrains + 1).join(" " + this.mastermind);
+  it("객체 메소드(속성값이 함수인 경우) 알아보기", function () {
+    var ken = {
+      favoriteFood: "돈까스",
+      age: 10,
+      eat: function (count) {
+        return `${this.favoriteFood} ${count}인분을 먹고 오겠습니다.`;
       }
     };
 
-    var battleCry = megalomaniac.battleCry(4);
-    expect(FILL_ME_IN).toMatch(battleCry);
+    var dietMessage = ken.eat(4);
+    expect(dietMessage).toMatch(FILL_ME_IN);
   });
 
-  it("should confirm that when a function is attached to an object, 'this' refers to the object", function () {
-    var currentDate = new Date();
-    var currentYear = (currentDate.getFullYear());
-    var megalomaniac = {
-      mastermind: "James Wood",
-      henchman: "Adam West",
-      birthYear: 1970,
-      calculateAge: function () {
-        return currentYear - this.birthYear;
-      }
+  describe("'in' 연산자 알아보기", function () {
+    var ken = {
+      age: 10,
+      favoriteFood: "돈까스"
     };
 
-    expect(currentYear).toBe(FILL_ME_IN);
-    expect(megalomaniac.calculateAge()).toBe(FILL_ME_IN);
-  });
+    it("존재하는 속성 확인하기", function () {
+      var hasFavoriteFood = "favoriteFood" in ken;
 
-  describe("'in' keyword", function () {
-    var megalomaniac;
-    beforeEach(function () {
-      megalomaniac = {
-        mastermind: "The Monarch",
-        henchwoman: "Dr Girlfriend",
-        theBomb: true
-      };
+      expect(hasFavoriteFood).toBe(FILL_ME_IN);
     });
 
-    it("should have the bomb", function () {
+    it("존재하지 않는 속성 확인하기", function () {
+      var hasFavoriteAnimal = "favoriteAnimal" in ken;
 
-      var hasBomb = "theBomb" in megalomaniac;
-
-      expect(hasBomb).toBe(FILL_ME_IN);
-    });
-
-    it("should not have the detonator however", function () {
-
-      var hasDetonator = "theDetonator" in megalomaniac;
-
-      expect(hasDetonator).toBe(FILL_ME_IN);
+      expect(hasFavoriteAnimal).toBe(FILL_ME_IN);
     });
   });
 
-  it("should know that properties can be added and deleted", function () {
-    var megalomaniac = { mastermind : "Agent Smith", henchman: "Agent Smith" };
+  it("객체의 속성과 값 추가 및 삭제하기", function () {
+    var ken = {
+      age: 10,
+      favoriteFood: "돈까스"
+    };
 
-    expect("secretary" in megalomaniac).toBe(FILL_ME_IN);
+    expect("favoriteAnimal" in ken).toBe(FILL_ME_IN);
 
-    megalomaniac.secretary = "Agent Smith";
-    expect("secretary" in megalomaniac).toBe(FILL_ME_IN);
+    ken.favoriteAnimal = "Doggy";
+    expect("favoriteAnimal" in ken).toBe(FILL_ME_IN);
 
-    delete megalomaniac.henchman;
-    expect("henchman" in megalomaniac).toBe(FILL_ME_IN);
-  });
-
-
-  it("should use prototype to add to all objects", function () {
-      function Circle(radius) {
-        this.radius = radius;
-      }
-
-      var simpleCircle = new Circle(10);
-      var colouredCircle = new Circle(5);
-      colouredCircle.colour = "red";
-
-      expect(simpleCircle.colour).toBe(FILL_ME_IN);
-      expect(colouredCircle.colour).toBe(FILL_ME_IN);
-
-      Circle.prototype.describe = function () {
-        return "This circle has a radius of: " + this.radius;
-      };
-
-      expect(simpleCircle.describe()).toBe(FILL_ME_IN);
-      expect(colouredCircle.describe()).toBe(FILL_ME_IN);
+    delete ken.favoriteFood;
+    expect("favoriteFood" in ken).toBe(FILL_ME_IN);
   });
 });

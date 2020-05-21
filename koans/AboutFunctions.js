@@ -1,7 +1,18 @@
-describe("About Functions", function() {
+/*
+ * AboutFunctions.js는 자바스크립트 Function(함수)에 대해 알아보는 시간입니다.
+ * 각종 문서를 참고하여 아래 문제를 하나씩 풀어보세요.
+ *
+ * MDN: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions
+ * Poiema Web: https://poiemaweb.com/js-function
+ *
+ */
 
-  it("should declare functions", function() {
+describe("JavaScript Function(함수) 알아보기", function() {
 
+  it("함수 선언(생성)하기", function() {
+    // 함수 내부에서 return이 어떤 기능을 하는지 아시나요?
+    // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/return
+    // https://poiemaweb.com/js-function#5-%EB%B0%98%ED%99%98%EA%B0%92
     function add(a, b) {
       return a + b;
     }
@@ -9,92 +20,87 @@ describe("About Functions", function() {
     expect(add(1, 2)).toBe(FILL_ME_IN);
   });
 
-  it("should know internal variables override outer variables", function () {
-    var message = "Outer";
+  it("함수의 매개변수 알아보기", function () {
+
+    function returnFirstArg(firstArg) {
+      return firstArg;
+    }
+
+    // 'returnFirstArg' 함수를 아래처럼 호출할 경우, 'firstArg'의 값은 무엇일까요?
+    expect(returnFirstArg("철수", "영희", "희수")).toBe(FILL_ME_IN);
+
+    function returnSecondArg(firstArg, secondArg) {
+      return secondArg;
+    }
+
+    // 두번째 매개변수로 지정된 값이 없을 경우, 'secondArg'의 값은 무엇일까요?
+    expect(returnSecondArg("철수")).toBe(FILL_ME_IN);
+
+    // arguments라는 키워드에 대해 알고 계신가요?
+    function returnAllArgs() {
+      var argsArray = [];
+      for (var i = 0; i < arguments.length; i++) {
+        argsArray.push(arguments[i]);
+      }
+      return argsArray.join(",");
+    }
+
+    expect(returnAllArgs("철수", "영희", "희수")).toBe(FILL_ME_IN);
+  });
+
+  // 함수 또한 하나의 값이기 때문에,
+  // 객체의 속성으로 지정될 수도 있고, 배열의 요소가 될 수도 있습니다.
+  it("객체의 속성으로서의 함수 알아보기", function () {
+
+    var welcomeMessage = function (name) {
+      return name + "야, 안녕!";
+    };
+
+    var goodbyeMessage = function (name) {
+      return name + "야, 잘가!";
+    };
+
+    var person = { say: welcomeMessage };
+    expect(person.say("철수")).toBe(FILL_ME_IN);
+
+    person.say = goodbyeMessage;
+    expect(person.say("영희")).toBe(FILL_ME_IN);
+
+  });
+
+  it("함수 내부의 변수와 함수 외부의 변수에 대해 알아보기", function () {
+    var message = "함수 외부";
 
     function getMessage() {
       return message;
     }
 
     function overrideMessage() {
-      var message = "Inner";
+      // 72번째 줄에 있는 변수와 이름은 같지만, 함수 내부에서 별도로 "선언"된 (다른) 변수입니다.
+      var message = "함수 내부";
       return message;
     }
 
     expect(getMessage()).toBe(FILL_ME_IN);
     expect(overrideMessage()).toBe(FILL_ME_IN);
+
+    // 이 부분을 잘 이해하고 넘어가세요 :)
     expect(message).toBe(FILL_ME_IN);
   });
 
-  it("should have lexical scoping", function () {
-    var variable = "top-level";
-    function parentfunction() {
-      var variable = "local";
-      function childfunction() {
-        return variable;
+  it("함수의 접근 범위 알아보기", function () {
+    var message = "상위 지역 변수";
+
+    function functionOne() {
+      var message = "하위 지역 변수";
+
+      function functionTwo() {
+        return message;
       }
-      return childfunction();
-    }
-    expect(parentfunction()).toBe(FILL_ME_IN);
-  });
 
-  it("should use lexical scoping to synthesise functions", function () {
-
-    function makeMysteryFunction(makerValue)
-    {
-      var newFunction = function doMysteriousThing(param)
-      {
-        return makerValue + param;
-      };
-      return newFunction;
+      return functionTwo();
     }
 
-    var mysteryFunction3 = makeMysteryFunction(3);
-    var mysteryFunction5 = makeMysteryFunction(5);
-
-    expect(mysteryFunction3(10) + mysteryFunction5(5)).toBe(FILL_ME_IN);
-  });
-
-  it("should allow extra function arguments", function () {
-
-    function returnFirstArg(firstArg) {
-      return firstArg;
-    }
-
-    expect(returnFirstArg("first", "second", "third")).toBe(FILL_ME_IN);
-
-    function returnSecondArg(firstArg, secondArg) {
-      return secondArg;
-    }
-
-    expect(returnSecondArg("only give first arg")).toBe(FILL_ME_IN);
-
-    function returnAllArgs() {
-      var argsArray = [];
-      for (var i = 0; i < arguments.length; i += 1) {
-        argsArray.push(arguments[i]);
-      }
-      return argsArray.join(",");
-    }
-
-    expect(returnAllArgs("first", "second", "third")).toBe(FILL_ME_IN);
-  });
-
-  it("should pass functions as values", function () {
-
-    var appendRules = function (name) {
-      return name + " rules!";
-    };
-
-    var appendDoubleRules = function (name) {
-      return name + " totally rules!";
-    };
-
-    var praiseSinger = { givePraise: appendRules };
-    expect(praiseSinger.givePraise("John")).toBe(FILL_ME_IN);
-
-    praiseSinger.givePraise = appendDoubleRules;
-    expect(praiseSinger.givePraise("Mary")).toBe(FILL_ME_IN);
-
+    expect(functionOne()).toBe(FILL_ME_IN);
   });
 });
