@@ -7,9 +7,8 @@
  *
  */
 
-describe("JavaScript Function(함수) 알아보기", function() {
-
-  it("함수 선언(생성)하기", function() {
+describe("JavaScript Function(함수) 알아보기", function () {
+  it("함수 선언(생성)하기", function () {
     // 함수 내부에서 return이 어떤 기능을 하는지 아시나요?
     // https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/return
     // https://poiemaweb.com/js-function#5-%EB%B0%98%ED%99%98%EA%B0%92
@@ -17,24 +16,23 @@ describe("JavaScript Function(함수) 알아보기", function() {
       return a + b;
     }
 
-    expect(add(1, 2)).toBe(FILL_ME_IN);
+    expect(add(1, 2)).toBe(3);
   });
 
   it("함수의 매개변수 알아보기", function () {
-
     function returnFirstArg(firstArg) {
       return firstArg;
     }
 
     // 'returnFirstArg' 함수를 아래처럼 호출할 경우, 'firstArg'의 값은 무엇일까요?
-    expect(returnFirstArg("철수", "영희", "희수")).toBe(FILL_ME_IN);
+    expect(returnFirstArg("철수", "영희", "희수")).toBe("철수");
 
     function returnSecondArg(firstArg, secondArg) {
       return secondArg;
     }
 
     // 두번째 매개변수로 지정된 값이 없을 경우, 'secondArg'의 값은 무엇일까요?
-    expect(returnSecondArg("철수")).toBe(FILL_ME_IN);
+    expect(returnSecondArg("철수")).toBe(undefined);
 
     // arguments라는 키워드에 대해 알고 계신가요?
     function returnAllArgs() {
@@ -45,13 +43,12 @@ describe("JavaScript Function(함수) 알아보기", function() {
       return argsArray.join(",");
     }
 
-    expect(returnAllArgs("철수", "영희", "희수")).toBe(FILL_ME_IN);
+    expect(returnAllArgs("철수", "영희", "희수")).toBe("철수,영희,희수");
   });
 
   // 함수 또한 하나의 값이기 때문에,
   // 객체의 속성으로 지정될 수도 있고, 배열의 요소가 될 수도 있습니다.
   it("객체의 속성으로서의 함수 알아보기", function () {
-
     var welcomeMessage = function (name) {
       return name + "야, 안녕!";
     };
@@ -61,11 +58,10 @@ describe("JavaScript Function(함수) 알아보기", function() {
     };
 
     var person = { say: welcomeMessage };
-    expect(person.say("철수")).toBe(FILL_ME_IN);
+    expect(person.say("철수")).toBe("철수야, 안녕!");
 
     person.say = goodbyeMessage;
-    expect(person.say("영희")).toBe(FILL_ME_IN);
-
+    expect(person.say("영희")).toBe("영희야, 잘가!");
   });
 
   it("함수 내부의 변수와 함수 외부의 변수에 대해 알아보기", function () {
@@ -81,11 +77,11 @@ describe("JavaScript Function(함수) 알아보기", function() {
       return message;
     }
 
-    expect(getMessage()).toBe(FILL_ME_IN);
-    expect(overrideMessage()).toBe(FILL_ME_IN);
+    expect(getMessage()).toBe("함수 외부");
+    expect(overrideMessage()).toBe("함수 내부");
 
     // 이 부분을 잘 이해하고 넘어가세요 :)
-    expect(message).toBe(FILL_ME_IN);
+    expect(message).toBe("함수 외부");
   });
 
   it("함수의 접근 범위 알아보기", function () {
@@ -101,6 +97,6 @@ describe("JavaScript Function(함수) 알아보기", function() {
       return functionTwo();
     }
 
-    expect(functionOne()).toBe(FILL_ME_IN);
+    expect(functionOne()).toBe("하위 지역 변수");
   });
 });

@@ -11,10 +11,8 @@
  *
  */
 
-describe('Jasmine 주요 기능 알아보기', function() {
-
-  it('true 판별하기 1', function() {
-
+describe("Jasmine 주요 기능 알아보기", function () {
+  it("true 판별하기 1", function () {
     /*
      * [가장 위 설명글을 먼저 읽고, 이 곳에서 시작하세요!]
      *
@@ -26,13 +24,13 @@ describe('Jasmine 주요 기능 알아보기', function() {
      *
      * 아래의 false를 true로 바꿔보세요.
      */
-    expect(false).toBeTruthy();
+    expect(true).toBeTruthy();
   });
 
   // [주의] FILL_ME_IN 외에는 그 어떤 것도 수정하지 마세요.
-  it('true 판별하기 2', function() {
+  it("true 판별하기 2", function () {
     // TODO: 아래 FILL_ME_IN을 지우고 올바른 값을 입력해주세요.
-    var expectedValue = FILL_ME_IN;
+    var expectedValue = 2;
     var actualValue = 1 + 1;
 
     // 위에서 보신 것처럼 expect 안의 값이 true가 되어야 통과할 수 있습니다.
@@ -41,9 +39,9 @@ describe('Jasmine 주요 기능 알아보기', function() {
   });
 
   // [주의] FILL_ME_IN 외에는 그 어떤 것도 수정하지 마세요.
-  it('같은 값 비교하기 (toEqual)', function() {
+  it("같은 값 비교하기 (toEqual)", function () {
     // TODO: 아래 FILL_ME_IN을 지우고 올바른 값을 입력해주세요.
-    var expectedValue = FILL_ME_IN;
+    var expectedValue = 2;
     var actualValue = 1 + 1;
 
     // 이번에는 expect 안의 값과 오른쪽 toEqual 안의 값이 같아야 통과가 가능합니다.
@@ -52,8 +50,8 @@ describe('Jasmine 주요 기능 알아보기', function() {
   });
 
   // [주의] FILL_ME_IN 외에는 그 어떤 것도 수정하지 마세요.
-  it('같은 값 비교하기 (toBe)', function() {
-    var expectedValue = FILL_ME_IN;
+  it("같은 값 비교하기 (toBe)", function () {
+    var expectedValue = "2";
     var actualValue = (1 + 1).toString();
 
     // 이번에도 expect 안의 값과 오른쪽 toBe 안의 값이 "!완전히!" 같아야 통과가 가능합니다.
@@ -62,8 +60,8 @@ describe('Jasmine 주요 기능 알아보기', function() {
   });
 
   // [주의] FILL_ME_IN 외에는 그 어떤 것도 수정하지 마세요.
-  it('should have filled in values', function() {
+  it("should have filled in values", function () {
     // TODO: 아래 FILL_ME_IN을 지우고 올바른 값을 입력해주세요. 이건 쉽게 통과시킬 수 있으시겠죠? :)
-    expect(1 + 1).toEqual(FILL_ME_IN);
+    expect(1 + 1).toEqual(2);
   });
 });
